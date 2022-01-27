@@ -1,0 +1,20 @@
+DirectoryIndex index.php
+
+# enable apache rewrite engine
+RewriteEngine on
+
+# set your rewrite base
+RewriteBase /
+
+# Si les fichiers existes, bypass le routeur (images ect...)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Push every request to index.php
+RewriteRule ^(.*)$ index.php [QSA]
+
+# block l'acces au  .env
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
